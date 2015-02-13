@@ -18,8 +18,10 @@ const int half  = 6;        // Half clock period
 const int full  = half * 2; // Full clock period
 
 // NES: Right Left Down Up Start Select B A
+// This is using WASD for D-pad
 char keys[] = { 100, 97, 115, 119, KEY_RETURN, 122, KEY_LEFT_CTRL, KEY_LEFT_SHIFT };
 
+// To store button-press bits
 byte buttons;
 
 void setup() {
@@ -34,7 +36,6 @@ void loop() {
   buttons = 0;
   read_NES();
 }
-
 
 /**
  * The NES controller data is read by setting the latch high
@@ -54,7 +55,7 @@ void loop() {
 void read_NES() {
   digitalWrite(latch, LOW);
   digitalWrite(clock, LOW);
-  
+
   digitalWrite(latch, HIGH);
   delayMicroseconds(full);
   digitalWrite(latch, LOW);
